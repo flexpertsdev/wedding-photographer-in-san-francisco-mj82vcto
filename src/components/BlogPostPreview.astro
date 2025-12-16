@@ -1,0 +1,35 @@
+---
+// BlogPostPreview.astro
+const { post } = Astro.props; // Post object with title, excerpt, date, image, slug
+import { format } from 'date-fns';
+---
+
+<article class="bg-white shadow-md rounded-md overflow-hidden">
+  <a href={`/blog/${post.slug}`}>
+    <img src={post.image} alt={post.title} class="w-full h-48 object-cover" loading="lazy" />
+  </a>
+  <div class="p-4">
+    <h3 class="text-xl font-semibold mb-2">
+      <a href={`/blog/${post.slug}`} class="hover:text-primary transition-colors duration-200">{post.title}</a>
+    </h3>
+    <p class="text-gray-600 text-sm mb-3">{post.excerpt}</p>
+    <div class="flex items-center justify-between">
+      <span class="text-gray-500 text-xs">
+        {format(new Date(post.date), 'MMMM dd, yyyy')}
+      </span>
+      <a href={`/blog/${post.slug}`} class="text-primary hover:text-primary-dark font-medium transition-colors duration-200">
+        Read More
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .text-primary {
+    color: theme('colors.rose.500');
+  }
+
+  .text-primary-dark {
+    color: theme('colors.rose.700');
+  }
+</style>

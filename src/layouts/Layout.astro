@@ -1,0 +1,18 @@
+---
+import SEOMeta from '../components/SEOMeta.astro';
+
+const pageTitle = "My Wedding Photography Website - Home";
+const pageDescription = "Professional wedding photographer offering stunning wedding photography services.";
+const pageKeywords = "wedding photographer, wedding photography, destination wedding photographer";
+const pageOGImage = "/images/hero.jpg";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <SEOMeta title={pageTitle} description={pageDescription} keywords={pageKeywords} ogImage={pageOGImage} />
+</head>
+<body>
+  <slot />
+</body>
+</html>

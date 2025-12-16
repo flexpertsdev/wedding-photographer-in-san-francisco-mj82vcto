@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+const posts = await getCollection('blog');
+
+// Sort posts by date (newest first)
+const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+---
+
+<Layout title="Wedding Photography Blog">
+  <main>
+    <h1>Wedding Photography Blog</h1>
+    <ul>
+      {sortedPosts.map((post) => (
+        <li>
+          <a href={`/blog/${post.slug}`}>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.description}</p>
+          </a>
+          <small>Published on: {new Date(post.data.pubDate).toLocaleDateString()}</small>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>

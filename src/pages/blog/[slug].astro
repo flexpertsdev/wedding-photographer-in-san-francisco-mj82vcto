@@ -1,0 +1,29 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { MDX } from 'astro:components';
+import Layout from '../../layouts/Layout.astro'; // Your layout component
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+type Props = {
+  post: CollectionEntry<'blog'>;
+};
+
+const { post } = Astro.props;
+const { Content } = await post.render(); // Render MDX content
+---
+
+<Layout title={post.data.title}>
+  <article>
+    <img src={post.data.heroImage} alt={post.data.altText} />
+    <h1>{post.data.title}</h1>
+    <p>Published on: {new Date(post.data.pubDate).toLocaleDateString()}</p>
+    <Content />  {/* Render the MDX content here */}
+  </article>
+</Layout>

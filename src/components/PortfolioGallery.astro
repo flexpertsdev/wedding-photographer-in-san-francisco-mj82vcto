@@ -1,0 +1,38 @@
+---
+// PortfolioGallery.astro
+const { images } = Astro.props; // Array of image objects (src, alt, category)
+
+const categories = [...new Set(images.map(image => image.category))]; // Get unique categories
+---
+
+<section class="py-12 bg-gray-50">
+  <div class="container mx-auto">
+    <h2 class="text-3xl font-semibold text-center mb-8">Portfolio</h2>
+
+    {/* Category Filters (Basic Example) */}
+    <div class="flex justify-center space-x-4 mb-6">
+      <button class="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-colors duration-200">All</button>
+      {categories.map(category => (
+        <button class="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-colors duration-200">{category}</button>
+      ))}
+    </div>
+
+    {/* Image Grid */}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {images.map(image => (
+        <div class="relative">
+          <img src={image.src} alt={image.alt} class="w-full h-64 object-cover rounded-md shadow-md" loading="lazy" />
+          <div class="absolute inset-0 bg-black opacity-0 hover:opacity-50 transition-opacity duration-200 flex items-center justify-center">
+            <a href={image.src} class="text-white text-xl font-semibold" > {/* Placeholder for Lightbox integration */}
+              View
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Add custom styles if needed */
+</style>

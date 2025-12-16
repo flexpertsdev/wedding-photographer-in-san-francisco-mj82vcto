@@ -1,0 +1,22 @@
+---
+// OptimizedImage.astro
+import { Image } from 'astro:assets';
+
+const { src, alt, width, height, ...props } = Astro.props;
+
+// Optional: Define sizes for responsive images
+const sizes = props.sizes || '(max-width: 768px) 100vw, 768px';
+
+---
+
+<Image
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  format="webp" // Automatically convert to WebP
+  loading="lazy"
+  {...props}
+  class={`rounded-md shadow-md ${props.class || ''}`} // Apply default styles and allow overrides
+  // sizes={sizes} // Uncomment for responsive images
+/>
